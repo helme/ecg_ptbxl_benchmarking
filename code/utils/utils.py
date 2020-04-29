@@ -443,7 +443,7 @@ def generate_ptbxl_summary_table(selection=None):
     ]
 
     # helper output function for markdown tables
-    our_work = 'https://arxiv.org/abs/2004.xxxxx'
+    our_work = 'https://arxiv.org/abs/2004.13701'
     our_repo = 'https://github.com/helme/ecg_ptbxl_benchmarking/'
     md_source = ''
     for i, e in enumerate(exps):
@@ -481,7 +481,7 @@ def ICBEBE_table(selection=None):
 
     df_rest = df[~df.index.isin(['naive', 'ensemble'])]
     df_rest = df_rest.sort_values('macro_auc', ascending=False)
-    our_work = 'https://arxiv.org/abs/2004.xxxxx'
+    our_work = 'https://arxiv.org/abs/2004.13701'
     our_repo = 'https://github.com/helme/ecg_ptbxl_benchmarking/'
 
     md_source = '| Model | AUC &darr; | Fmax | F_beta=2 | G_beta=2 | paper/source | code | \n'
