@@ -95,7 +95,7 @@ tr_df.quantile(0.05), tr_df.mean(), tr_df.quantile(0.95)
 ```
 
 ### Notes on Finetuning
-In [this jupyter notebook](https://github.com/helme/ecg_ptbxl_benchmarking/code/Finetuning-Example.ipynb) we provide a basic example of how to finetune our provided models on your custom dataset.
+In [this jupyter notebook](https://github.com/helme/ecg_ptbxl_benchmarking/blob/master/code/Finetuning-Example.ipynb) we provide a basic example of how to finetune our provided models on your custom dataset.
 
 
 
