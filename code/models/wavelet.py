@@ -96,6 +96,7 @@ def keras_macro_auroc(y_true, y_pred):
 
 class WaveletModel(ClassificationModel):
     def __init__(self, name, n_classes,  freq, outputfolder, input_shape, regularizer_C=.001, classifier='RF'):
+        # Disclaimer: This model assumes equal shapes across all samples!
         # standard parameters
         self.name = name
         self.outputfolder = outputfolder

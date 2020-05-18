@@ -82,7 +82,6 @@ Since bootstrapping results might take a while (even in parallel as in our code)
 **If you want to bootstrap your results:** In each respective experiment-folder `output/exp_*/` the bootstrapping ids for training, 
 testing and validation is stored as numpy-arrays containing lists of ids. Otherwise create manually with `utils.get_appropriate_bootstrap_samples(y_train, n_bootstraping_samples)`. For sequential evaluation of those ids, the code might look like:
 
-
 ```python
 if experiment_name == 'exp_ICBEB':
     thresholds = utils.find_optimal_cutoff_thresholds(y_train, y_train_pred)
@@ -95,7 +94,8 @@ tr_df = pd.concat([utils.evaluate_experiment(y_train[ids], y_train_pred[ids], th
 tr_df.quantile(0.05), tr_df.mean(), tr_df.quantile(0.95)
 ```
 
-    
+### Notes on Finetuning
+In [this jupyter notebook](https://github.com/helme/ecg_ptbxl_benchmarking/code/Finetuning-Example.ipynb) we provide a basic example of how to finetune our provided models on your custom dataset.
 
 
 
@@ -202,7 +202,7 @@ Please acknowledge our work by citing our preprint
     year={2020},
     eprint={2004.13701},
     archivePrefix={arXiv},
-    primaryClass={stat.ML}
+    primaryClass={cs.LG}
     }
 	
 For the PTB-XL dataset, please cite

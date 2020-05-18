@@ -261,12 +261,11 @@ class fastai_model(ClassificationModel):
             
             #train
             lr = self.lr
-            epochs_freezing = 30
             if(self.gradual_unfreezing):
                 assert(self.discriminative_lrs is True)
                 learn.freeze()
                 lr_find_plot(learn, self.outputfolder,"lr_find0")
-                learn.fit_one_cycle(epochs_freezing,lr)
+                learn.fit_one_cycle(self.epochs_finetuning,lr)
                 losses_plot(learn, self.outputfolder,"losses0")
                 #for n in [0]:#range(len(layer_groups)):
                 #    learn.freeze_to(-n-1)
