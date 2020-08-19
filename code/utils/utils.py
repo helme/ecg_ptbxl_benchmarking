@@ -33,8 +33,6 @@ def evaluate_experiment(y_true, y_pred, thresholds=None):
 
     # label based metric
     results['macro_auc'] = roc_auc_score(y_true, y_pred, average='macro')
-    # sample based metric
-    results['Fmax'] = F_max(y_true, y_pred)
     
     df_result = pd.DataFrame(results, index=[0])
     return df_result
@@ -66,50 +64,6 @@ def challenge_metrics(y_true, y_pred, beta1=2, beta2=2, class_weights=None, sing
         g_beta += g_beta_i
 
     return {'F_beta_macro':f_beta/y_true.shape[1], 'G_beta_macro':g_beta/y_true.shape[1]}
-
-def F_max(y_true, y_pred, num_thresholds=100):
-    '''returns a dictionary of performance metrics:
-    Inspired by: sample centric c.f.
-    https://github.com/ashleyzhou972/CAFA_assessment_tool/blob/master/precrec/precRec.py
-
-    References:
-        https://www.nature.com/articles/nmeth.2340
-        https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3694662/
-        https://arxiv.org/pdf/1601.00891
-
-    * Fmax, sample AUC, sample Average Precision (as in sklearn)
-    
-    label-centric: micro,macro,individual AUC and Average Precision
-    '''
-    
-    thresholds = np.arange(0.00, 1.01, 1./num_thresholds, float)
-    PR,RC = eval_prrc_parallel(y_true,y_pred,thresholds)
-    F = (2*PR*RC)/(PR+RC)
-    imax = np.nanargmax(F)
-    return  F[imax]
-
-def eval_prrc_parallel(y_true, y_pred, thresholds):
-    # expand analysis to number of thresholds
-    y_pred_bin = np.repeat(y_pred[None, :, :], len(thresholds), axis=0)>=thresholds[:,None,None]
-    y_true_bin = np.repeat(y_true[None, :, :], len(thresholds), axis=0)
-   
-    # compute true positives
-    TP = np.sum(np.logical_and(y_true == True , y_pred_bin == True), axis=2)
-
-    # compute macro average precision handling all warnings
-    with np.errstate(divide='ignore', invalid='ignore'):
-        den = np.sum(y_pred_bin, axis=2)
-        precision = TP/den
-        precision[den==0] = np.nan
-        with warnings.catch_warnings(): #for nan slices
-            warnings.simplefilter("ignore", category=RuntimeWarning)
-            av_precision = np.nanmean(precision,axis=1)
-
-    # compute macro average recall
-    recall = TP/np.sum(y_true_bin, axis=2)
-    av_recall = np.mean(recall, axis=1)
-    
-    return av_precision, av_recall
 
 def get_appropriate_bootstrap_samples(y_true, n_bootstraping_samples):
     samples=[]
@@ -379,17 +333,16 @@ def apply_standardizer(X, ss):
 
 # DOCUMENTATION STUFF
 
-def generate_ptbxl_summary_table(selection=None):
+def generate_ptbxl_summary_table(selection=None, folder='../output/'):
 
     exps = ['exp0', 'exp1', 'exp1.1', 'exp1.1.1', 'exp2', 'exp3']
-    metric1 = 'Fmax'
-    metric2 = 'macro_auc'
+    metric1 = 'macro_auc'
 
     # get models
     models = {}
     for i, exp in enumerate(exps):
         if selection is None:
-            exp_models = [m.split('/')[-1] for m in glob.glob('../output/'+str(exp)+'/models/*')]
+            exp_models = [m.split('/')[-1] for m in glob.glob(folder+str(exp)+'/models/*')]
         else:
             exp_models = selection
         if i == 0:
@@ -398,12 +351,12 @@ def generate_ptbxl_summary_table(selection=None):
             models = models.union(set(exp_models))
 
     results_dic = {'Method':[], 
-                'exp0_AUC':[], 'exp0_Fmax':[], 
-                'exp1_AUC':[], 'exp1_Fmax':[], 
-                'exp1.1_AUC':[], 'exp1.1_Fmax':[], 
-                'exp1.1.1_AUC':[], 'exp1.1.1_Fmax':[], 
-                'exp2_AUC':[], 'exp2_Fmax':[],
-                'exp3_AUC':[], 'exp3_Fmax':[]
+                'exp0_AUC':[], 
+                'exp1_AUC':[], 
+                'exp1.1_AUC':[], 
+                'exp1.1.1_AUC':[], 
+                'exp2_AUC':[],
+                'exp3_AUC':[]
                 }
 
     for m in models:
@@ -412,26 +365,22 @@ def generate_ptbxl_summary_table(selection=None):
         for e in exps:
             
             try:
-                me_res = pd.read_csv('../output/'+str(e)+'/models/'+str(m)+'/results/te_results.csv', index_col=0)
+                me_res = pd.read_csv(folder+str(e)+'/models/'+str(m)+'/results/te_results.csv', index_col=0)
     
                 mean1 = me_res.loc['point'][metric1]
                 unc1 = max(me_res.loc['upper'][metric1]-me_res.loc['point'][metric1], me_res.loc['point'][metric1]-me_res.loc['lower'][metric1])
-                mean2 = me_res.loc['point'][metric2]
-                unc2 = max(me_res.loc['upper'][metric2]-me_res.loc['point'][metric2], me_res.loc['point'][metric2]-me_res.loc['lower'][metric2])
-            
-                results_dic[e+'_Fmax'].append("%.3f(%.2d)" %(np.round(mean1,3), int(unc1*1000)))
-                results_dic[e+'_AUC'].append("%.3f(%.2d)" %(np.round(mean2,3), int(unc2*1000)))
+
+                results_dic[e+'_AUC'].append("%.3f(%.2d)" %(np.round(mean1,3), int(unc1*1000)))
 
             except FileNotFoundError:
                 results_dic[e+'_AUC'].append("--")
-                results_dic[e+'_Fmax'].append("--")
             
             
     df = pd.DataFrame(results_dic)
     df_index = df[df.Method.isin(['naive', 'ensemble'])]
     df_rest = df[~df.Method.isin(['naive', 'ensemble'])]
     df = pd.concat([df_rest, df_index])
-    df.to_csv('../output/results_ptbxl.csv')
+    df.to_csv(folder+'results_ptbxl.csv')
 
     titles = [
         '### 1. PTB-XL: all statements',
@@ -448,17 +397,17 @@ def generate_ptbxl_summary_table(selection=None):
     md_source = ''
     for i, e in enumerate(exps):
         md_source += '\n '+titles[i]+' \n \n'
-        md_source += '| Model | Fmax | AUC &darr; | paper/source | code | \n'
-        md_source += '|---:|:---|:---|:---|:---| \n'
-        for row in df_rest[['Method', e+'_Fmax', e+'_AUC']].sort_values(e+'_AUC', ascending=False).values:
-            md_source += '| ' + row[0].replace('fastai_', '') + ' | ' + row[1] + ' | ' + row[2] + ' | [our work]('+our_work+') | [this repo]('+our_repo+')| \n'
+        md_source += '| Model | AUC &darr; | paper/source | code | \n'
+        md_source += '|---:|:---|:---|:---| \n'
+        for row in df_rest[['Method', e+'_AUC']].sort_values(e+'_AUC', ascending=False).values:
+            md_source += '| ' + row[0].replace('fastai_', '') + ' | ' + row[1] + ' | [our work]('+our_work+') | [this repo]('+our_repo+')| \n'
     print(md_source)
 
-def ICBEBE_table(selection=None):
-    cols = ['macro_auc', 'Fmax', 'F_beta_macro', 'G_beta_macro']
+def ICBEBE_table(selection=None, folder='../output/'):
+    cols = ['macro_auc', 'F_beta_macro', 'G_beta_macro']
 
     if selection is None:
-        models = [m.split('/')[-1].split('_pretrained')[0] for m in glob.glob('../output/exp_ICBEB/models/*')]
+        models = [m.split('/')[-1].split('_pretrained')[0] for m in glob.glob(folder+'exp_ICBEB/models/*')]
     else:
         models = [] 
         for s in selection:
@@ -467,7 +416,7 @@ def ICBEBE_table(selection=None):
 
     data = []
     for model in models:
-        me_res = pd.read_csv('../output/exp_ICBEB/models/'+model+'/results/te_results.csv', index_col=0)
+        me_res = pd.read_csv(folder+'exp_ICBEB/models/'+model+'/results/te_results.csv', index_col=0)
         mcol=[]
         for col in cols:
             mean = me_res.ix['point'][col]
@@ -477,15 +426,15 @@ def ICBEBE_table(selection=None):
     data = np.array(data)
 
     df = pd.DataFrame(data, columns=cols, index=models)
-    df.to_csv('../output/results_icbeb.csv')
+    df.to_csv(folder+'results_icbeb.csv')
 
     df_rest = df[~df.index.isin(['naive', 'ensemble'])]
     df_rest = df_rest.sort_values('macro_auc', ascending=False)
     our_work = 'https://arxiv.org/abs/2004.13701'
     our_repo = 'https://github.com/helme/ecg_ptbxl_benchmarking/'
 
-    md_source = '| Model | AUC &darr; | Fmax | F_beta=2 | G_beta=2 | paper/source | code | \n'
-    md_source += '|---:|:---|:---|:---|:---|:---|:---| \n'
+    md_source = '| Model | AUC &darr; |  F_beta=2 | G_beta=2 | paper/source | code | \n'
+    md_source += '|---:|:---|:---|:---|:---|:---| \n'
     for i, row in enumerate(df_rest[cols].values):
-        md_source += '| ' + df_rest.index[i].replace('fastai_', '') + ' | ' + row[0] + ' | ' + row[1] + ' | ' + row[2] + ' | ' + row[3] + ' | [our work]('+our_work+') | [this repo]('+our_repo+')| \n'
+        md_source += '| ' + df_rest.index[i].replace('fastai_', '') + ' | ' + row[0] + ' | ' + row[1] + ' | ' + row[2] + ' | [our work]('+our_work+') | [this repo]('+our_repo+')| \n'
     print(md_source)
