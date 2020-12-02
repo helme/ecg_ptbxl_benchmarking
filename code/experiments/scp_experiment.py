@@ -128,9 +128,9 @@ class SCP_Experiment():
         for model_description in os.listdir(self.outputfolder+self.experiment_name+'/models/'):
             if not model_description in ['ensemble', 'naive']:
                 mpath = self.outputfolder+self.experiment_name+'/models/'+model_description+'/'
-                ensemble_train.append(np.load(mpath+'y_train_pred.npy'))
-                ensemble_val.append(np.load(mpath+'y_val_pred.npy'))
-                ensemble_test.append(np.load(mpath+'y_test_pred.npy'))
+                ensemble_train.append(np.load(mpath+'y_train_pred.npy', allow_pickle=True))
+                ensemble_val.append(np.load(mpath+'y_val_pred.npy', allow_pickle=True))
+                ensemble_test.append(np.load(mpath+'y_test_pred.npy', allow_pickle=True))
         # dump mean predictions
         np.array(ensemble_train).mean(axis=0).dump(ensemblepath + 'y_train_pred.npy')
         np.array(ensemble_test).mean(axis=0).dump(ensemblepath + 'y_test_pred.npy')
