@@ -11,10 +11,10 @@ Please acknowledge our work by citing the corresponding articles listed in **Ref
 ## Setup
 
 ### Install dependencies
-Install the dependencies by creating a conda environment:
+Install the dependencies (wfdb, pytorch, torchvision, cudatoolkit, fastai, fastprogress) by creating a conda environment:
 
     conda env create -f ecg_env.yml
-    conda activate ecg_python37
+    conda activate ecg_env
 
 ### Get data
 Download and prepare the datasets (PTB-XL and ICBEB) via the follwing bash-script:
@@ -38,7 +38,7 @@ where for each experiment a sub-folder is created each with `data/`, `models/` a
 
 ### Download models and results
 
-We also provide a [compressed zip-archive](https://datacloud.hhi.fraunhofer.de/nextcloud/s/gLkjQL94d7FXBbS) containing the `output` folder corresponding to our runs including trained models and predictions from our runs mentioned in the leaderboard below. 
+We also provide a [compressed zip-archive](https://datacloud.hhi.fraunhofer.de/s/gLkjQL94d7FXBbS) containing the `output` folder corresponding to our runs including trained models and predictions from our runs mentioned in the leaderboard below. 
 
 ## Benchmarking user-provided models
 For creating custom benchmarking results our recommendation is as follows:
@@ -211,8 +211,7 @@ For the PTB-XL dataset, please cite
     author={Patrick Wagner and Nils Strodthoff and Ralf-Dieter Bousseljot and Dieter Kreiseler and Fatima I. Lunze and Wojciech Samek and Tobias Schaeffter},
     title={{PTB-XL}, a large publicly available electrocardiography dataset},
     journal={Scientific Data},
-    year={2020},
-    note={awaiting publication}
+    year={2020}
     }
 
     @misc{Wagner2020:ptbxlphysionet,
