@@ -1,6 +1,6 @@
 # Deep Learning for ECG Analysis: Benchmarks and Insights from PTB-XL
 This repository is accompanying our article [Deep Learning for ECG Analysis: Benchmarks
-and Insights from PTB-XL](https://arxiv.org/abs/2004.13701), which builds on the [PTB-XL dataset](https://www.nature.com/articles/s41597-020-0495-6). 
+and Insights from PTB-XL](https://doi.org/10.1109/jbhi.2020.3022989), which builds on the [PTB-XL dataset](https://www.nature.com/articles/s41597-020-0495-6). 
 It allows to reproduce the ECG benchmarking experiments described in the paper and to benchmark
 user-provided models within our framework. We also maintain a leaderboard for the described PTB-XL dataset
 on this page, so feel free to submit your results as PRs.
@@ -11,10 +11,10 @@ Please acknowledge our work by citing the corresponding articles listed in **Ref
 ## Setup
 
 ### Install dependencies
-Install the dependencies by creating a conda environment:
+Install the dependencies (wfdb, pytorch, torchvision, cudatoolkit, fastai, fastprogress) by creating a conda environment:
 
     conda env create -f ecg_env.yml
-    conda activate ecg_python37
+    conda activate ecg_env
 
 ### Get data
 Download and prepare the datasets (PTB-XL and ICBEB) via the follwing bash-script:
@@ -38,7 +38,7 @@ where for each experiment a sub-folder is created each with `data/`, `models/` a
 
 ### Download models and results
 
-We also provide a [compressed zip-archive](https://datacloud.hhi.fraunhofer.de/nextcloud/s/gLkjQL94d7FXBbS) containing the `output` folder corresponding to our runs including trained models and predictions from our runs mentioned in the leaderboard below. 
+We also provide a [compressed zip-archive](https://datacloud.hhi.fraunhofer.de/s/gLkjQL94d7FXBbS) containing the `output` folder corresponding to our runs including trained models and predictions from our runs mentioned in the leaderboard below. 
 
 ## Benchmarking user-provided models
 For creating custom benchmarking results our recommendation is as follows:
@@ -111,108 +111,114 @@ and `targs_x.npy` and `classes_x.npy`) to ensure full reproducibility and to mak
  
 | Model | AUC &darr; | paper/source | code | 
 |---:|:---|:---|:---| 
-| inception1d | 0.925(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| xresnet1d101 | 0.925(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| resnet1d_wang | 0.919(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.918(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.914(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.907(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.849(13) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.925(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.925(07) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.919(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.918(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.914(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.907(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.849(13) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
  ### 2. PTB-XL: diagnostic statements 
  
 | Model | AUC &darr; | paper/source | code | 
 |---:|:---|:---|:---| 
-| xresnet1d101 | 0.937(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| resnet1d_wang | 0.936(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.932(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| inception1d | 0.931(09) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.927(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.926(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.855(15) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.937(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.936(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.932(07) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.931(09) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.927(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.926(10) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.855(15) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
  ### 3. PTB-XL: Diagnostic subclasses 
  
 | Model | AUC &darr; | paper/source | code | 
 |---:|:---|:---|:---| 
-| inception1d | 0.930(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| xresnet1d101 | 0.929(14) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.928(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| resnet1d_wang | 0.928(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.927(11) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.923(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.859(16) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.930(10) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.929(14) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.928(10) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.928(10) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.927(11) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.923(12) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.859(16) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
  ### 4. PTB-XL: Diagnostic superclasses 
  
 | Model | AUC &darr; | paper/source | code | 
 |---:|:---|:---|:---| 
-| resnet1d_wang | 0.930(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| xresnet1d101 | 0.928(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.927(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.925(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| inception1d | 0.921(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.921(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.874(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.930(05) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.928(05) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.927(05) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.925(06) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.921(06) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.921(06) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.874(07) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
  ### 5. PTB-XL: Form statements 
  
 | Model | AUC &darr; | paper/source | code | 
 |---:|:---|:---|:---| 
-| inception1d | 0.899(22) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| xresnet1d101 | 0.896(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| resnet1d_wang | 0.880(15) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.876(15) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.869(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.851(15) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.757(29) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.899(22) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.896(12) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.880(15) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.876(15) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.869(12) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.851(15) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.757(29) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
  ### 6. PTB-XL: Rhythm statements 
  
 | Model | AUC &darr; | paper/source | code | 
 |---:|:---|:---|:---| 
-| xresnet1d101 | 0.957(19) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| inception1d | 0.953(13) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.953(09) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.949(11) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| resnet1d_wang | 0.946(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.931(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.890(24) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.957(19) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.953(13) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.953(09) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.949(11) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.946(10) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.931(08) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.890(24) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
 
 ### 7. ICBEB: All statements
 
 | Model | AUC &darr; |  F_beta=2 | G_beta=2 | paper/source | code | 
 |---:|:---|:---|:---|:---|:---| 
-| xresnet1d101 | 0.974(05) | 0.819(30) | 0.602(37) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| resnet1d_wang | 0.969(06) | 0.803(31) | 0.586(37) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm | 0.964(06) | 0.790(31) | 0.561(37) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| inception1d | 0.963(09) | 0.807(30) | 0.594(41) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| lstm_bidir | 0.959(11) | 0.796(31) | 0.573(36) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| fcn_wang | 0.957(08) | 0.787(31) | 0.563(37) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
-| Wavelet+NN | 0.905(14) | 0.665(34) | 0.405(36) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.974(05) | 0.819(30) | 0.602(37) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.969(06) | 0.803(31) | 0.586(37) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.964(06) | 0.790(31) | 0.561(37) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.963(09) | 0.807(30) | 0.594(41) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.959(11) | 0.796(31) | 0.573(36) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.957(08) | 0.787(31) | 0.563(37) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.905(14) | 0.665(34) | 0.405(36) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
 # References
 Please acknowledge our work by citing our preprint
 
-    @article{Strodthoff2020:ecgbenchmarking,
-    title={Deep Learning for ECG Analysis: Benchmarks and Insights from PTB-XL},
-    author={Nils Strodthoff and Patrick Wagner and Tobias Schaeffter and Wojciech Samek},
-    journal={arXiv preprint 2004.13701},
-    year={2020},
-    eprint={2004.13701},
-    archivePrefix={arXiv},
-    primaryClass={cs.LG}
+    @article{Strodthoff:2020Deep,
+    doi = {10.1109/jbhi.2020.3022989},
+    url = {https://doi.org/10.1109/jbhi.2020.3022989},
+    year = {2020},
+    publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+    author = {Nils Strodthoff and Patrick Wagner and Tobias Schaeffter and Wojciech Samek},
+    title = {Deep Learning for {ECG} Analysis: Benchmarks and Insights from {PTB}-{XL}},
+    journal = {{IEEE} Journal of Biomedical and Health Informatics},
+    note = {to appear}
     }
 	
 For the PTB-XL dataset, please cite
 
-    @article{Wagner2020:ptbxl,
-    author={Patrick Wagner and Nils Strodthoff and Ralf-Dieter Bousseljot and Dieter Kreiseler and Fatima I. Lunze and Wojciech Samek and Tobias Schaeffter},
-    title={{PTB-XL}, a large publicly available electrocardiography dataset},
-    journal={Scientific Data},
-    year={2020},
-    note={awaiting publication}
+    @article{Wagner:2020PTBXL,
+    doi = {10.1038/s41597-020-0495-6},
+    url = {https://doi.org/10.1038/s41597-020-0495-6},
+    year = {2020},
+    publisher = {Springer Science and Business Media {LLC}},
+    volume = {7},
+    number = {1},
+    pages = {154},
+    author = {Patrick Wagner and Nils Strodthoff and Ralf-Dieter Bousseljot and Dieter Kreiseler and Fatima I. Lunze and Wojciech Samek and Tobias Schaeffter},
+    title = {{PTB}-{XL},  a large publicly available electrocardiography dataset},
+    journal = {Scientific Data}
     }
 
     @misc{Wagner2020:ptbxlphysionet,
