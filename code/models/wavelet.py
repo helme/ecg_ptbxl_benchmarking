@@ -81,18 +81,10 @@ def get_ecg_features(ecg_data, parallel=True):
             features = get_single_ecg_features(signal)
             list_features.append(features)
         return np.array(list_features)
-# for keras models
-def macro_auroc(y_true, y_pred):
-    aucs = []
-    for i in range(y_true.shape[1]):
-        try:
-            aucs.append(roc_auc_score(y_true[:,i], y_pred[:,i]))
-        except ValueError:
-            pass
-    return np.array(aucs).mean(axis=0)
 
-def keras_macro_auroc(y_true, y_pred):
-    return tf.py_func(macro_auroc, (y_true, y_pred), tf.double)
+# for keras models
+#def keras_macro_auroc(y_true, y_pred):
+#    return tf.py_func(macro_auroc, (y_true, y_pred), tf.double)
 
 class WaveletModel(ClassificationModel):
     def __init__(self, name, n_classes,  freq, outputfolder, input_shape, regularizer_C=.001, classifier='RF'):
@@ -113,8 +105,6 @@ class WaveletModel(ClassificationModel):
     def fit(self, X_train, y_train, X_val, y_val):
         XF_train = get_ecg_features(X_train)
         XF_val = get_ecg_features(X_val)
-        #clf = RandomForestClassifier(n_estimators=1000, n_jobs=16, max_depth=32, max_features=32, max_leaf_nodes=64)
-        #clf = MLPClassifier(hidden_layer_sizes=(512,128,32),verbose=True)
         
         if self.classifier == 'LR':
             if self.n_classes > 1:
@@ -122,12 +112,10 @@ class WaveletModel(ClassificationModel):
             else:
                 clf = LogisticRegression(C=self.regularizer_C, solver='lbfgs', max_iter=1000, n_jobs=-1)
             clf.fit(XF_train, y_train)
-            #print("store")
             pickle.dump(clf, open(self.outputfolder+'clf.pkl', 'wb'))
         elif self.classifier == 'RF':
             clf = RandomForestClassifier(n_estimators=1000, n_jobs=16)
             clf.fit(XF_train, y_train)
-            #print("store")
             pickle.dump(clf, open(self.outputfolder+'clf.pkl', 'wb'))
         elif self.classifier == 'NN':
             # standardize input data
@@ -142,11 +130,11 @@ class WaveletModel(ClassificationModel):
             y = Dense(self.n_classes, activation=self.final_activation)(x)
             self.model = Model(input_x, y)
             
-            self.model.compile(optimizer='adamax', loss='binary_crossentropy', metrics=[keras_macro_auroc])
+            self.model.compile(optimizer='adamax', loss='binary_crossentropy')#, metrics=[keras_macro_auroc])
             # monitor validation error
             mc_loss = ModelCheckpoint(self.outputfolder +'best_loss_model.h5', monitor='val_loss', mode='min', verbose=1, save_best_only=True)
-            mc_score = ModelCheckpoint(self.outputfolder +'best_score_model.h5', monitor='val_keras_macro_auroc', mode='max', verbose=1, save_best_only=True)
-            self.model.fit(XFT_train, y_train, validation_data=(XFT_val, y_val), epochs=self.epochs, batch_size=128, callbacks=[mc_loss, mc_score])
+            #mc_score = ModelCheckpoint(self.outputfolder +'best_score_model.h5', monitor='val_keras_macro_auroc', mode='max', verbose=1, save_best_only=True)
+            self.model.fit(XFT_train, y_train, validation_data=(XFT_val, y_val), epochs=self.epochs, batch_size=128, callbacks=[mc_loss])#, mc_score])
             self.model.save(self.outputfolder +'last_model.h5')
 
     def predict(self, X):
@@ -167,5 +155,5 @@ class WaveletModel(ClassificationModel):
         elif self.classifier == 'NN':
             ss = pickle.load(open(self.outputfolder+'ss.pkl', 'rb'))#
             XFT = ss.transform(XF)
-            model = load_model(self.outputfolder+'best_score_model.h5', custom_objects={'keras_macro_auroc': keras_macro_auroc})
+            model = load_model(self.outputfolder+'best_loss_model.h5')#'best_score_model.h5', custom_objects={'keras_macro_auroc': keras_macro_auroc})
             return model.predict(XFT)

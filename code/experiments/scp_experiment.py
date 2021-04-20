@@ -136,7 +136,7 @@ class SCP_Experiment():
         np.array(ensemble_test).mean(axis=0).dump(ensemblepath + 'y_test_pred.npy')
         np.array(ensemble_val).mean(axis=0).dump(ensemblepath + 'y_val_pred.npy')
 
-    def evaluate(self, n_bootstraping_samples=100, n_jobs=20, bootstrap_eval=True, dumped_bootstraps=True):
+    def evaluate(self, n_bootstraping_samples=100, n_jobs=20, bootstrap_eval=False, dumped_bootstraps=True):
 
         # get labels
         y_train = np.load(self.outputfolder+self.experiment_name+'/data/y_train.npy', allow_pickle=True)
