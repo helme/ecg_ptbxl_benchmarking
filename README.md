@@ -193,17 +193,19 @@ and `targs_x.npy` and `classes_x.npy`) to ensure full reproducibility and to mak
 | Wavelet+NN | 0.905(14) | 0.665(34) | 0.405(36) | [our work](https://doi.org/10.1109/jbhi.2020.3022989) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
 
 # References
-Please acknowledge our work by citing our preprint
+Please acknowledge our work by citing our journal paper
 
     @article{Strodthoff:2020Deep,
     doi = {10.1109/jbhi.2020.3022989},
     url = {https://doi.org/10.1109/jbhi.2020.3022989},
-    year = {2020},
+    year = {2021},
+    volume={25},
+    number={5},
+    pages={1519-1528},
     publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
     author = {Nils Strodthoff and Patrick Wagner and Tobias Schaeffter and Wojciech Samek},
     title = {Deep Learning for {ECG} Analysis: Benchmarks and Insights from {PTB}-{XL}},
-    journal = {{IEEE} Journal of Biomedical and Health Informatics},
-    note = {to appear}
+    journal = {{IEEE} Journal of Biomedical and Health Informatics}
     }
 	
 For the PTB-XL dataset, please cite
