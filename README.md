@@ -102,10 +102,7 @@ In [this jupyter notebook](https://github.com/helme/ecg_ptbxl_benchmarking/blob/
 ## Leaderboard
 
 We encourage other authors to share their results on this dataset by submitting a PR. The evaluation proceeds as described in the manuscripts: 
-In all cases we restrict to classes with more than 50 entries in the whole dataset. The reported scores are test set scores (fold 10) as output 
-of the above evaluation procedure and should **not be used for hyperparameter tuning or model selection**. In the provided code, we use folds 1-8 for training, 
-fold 9 as validation set and fold 10 as test set. We encourage to submit also the prediction results (`preds`, `targs`, `classes` saved as numpy arrays `preds_x.npy` 
-and `targs_x.npy` and `classes_x.npy`) to ensure full reproducibility and to make source code and/or pretrained models available.
+The reported scores are test set scores (fold 10) as output of the above evaluation procedure and should **not be used for hyperparameter tuning or model selection**. In the provided code, we use folds 1-8 for training, fold 9 as validation set and fold 10 as test set. We encourage to submit also the prediction results (`preds`, `targs`, `classes` saved as numpy arrays `preds_x.npy` and `targs_x.npy` and `classes_x.npy`) to ensure full reproducibility and to make source code and/or pretrained models available.
 
  ### 1. PTB-XL: all statements 
  
