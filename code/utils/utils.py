@@ -114,7 +114,7 @@ def apply_thresholds(preds, thresholds):
 # DATA PROCESSING STUFF
 
 def load_dataset(path, sampling_rate, release=False):
-    if path.split('/')[-2] == 'ptbxl':
+    if path.split('/')[-2] == 'ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1':
         # load and convert annotation data
         Y = pd.read_csv(path+'ptbxl_database.csv', index_col='ecg_id')
         Y.scp_codes = Y.scp_codes.apply(lambda x: ast.literal_eval(x))
