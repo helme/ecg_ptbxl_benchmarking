@@ -9,7 +9,7 @@ def main():
     
     datafolder = '../../content/data/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1/'
     datafolder_icbeb = '../data/ICBEB/'
-    outputfolder = '../output/'
+    outputfolder = '../../content/output/'
 
     models = [
         conf_fastai_xresnet1d101,
