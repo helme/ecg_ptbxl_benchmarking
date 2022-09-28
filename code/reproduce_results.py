@@ -41,7 +41,7 @@ def main():
         e.evaluate()
 
     # generate greate summary table
-    utils.generate_ptbxl_summary_table()
+    utils.generate_ptbxl_summary_table(folder = '../../content/output/')
 
     ##########################################
     # EXPERIMENT BASED ICBEB DATA
@@ -53,7 +53,7 @@ def main():
     e.evaluate()
 
     # generate greate summary table
-    utils.ICBEBE_table()
+    utils.ICBEBE_table(folder='../../content/output/')
 
 if __name__ == "__main__":
     main()

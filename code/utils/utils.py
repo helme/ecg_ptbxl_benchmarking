@@ -335,7 +335,7 @@ def apply_standardizer(X, ss):
 
 # DOCUMENTATION STUFF
 
-def generate_ptbxl_summary_table(selection=None, folder='../output/'):
+def generate_ptbxl_summary_table(selection=None, folder: str="./your/path/to/ptbxl/"):
 
     exps = ['exp0', 'exp1', 'exp1.1', 'exp1.1.1', 'exp2', 'exp3']
     metric1 = 'macro_auc'
@@ -405,7 +405,7 @@ def generate_ptbxl_summary_table(selection=None, folder='../output/'):
             md_source += '| ' + row[0].replace('fastai_', '') + ' | ' + row[1] + ' | [our work]('+our_work+') | [this repo]('+our_repo+')| \n'
     print(md_source)
 
-def ICBEBE_table(selection=None, folder='../output/'):
+def ICBEBE_table(selection=None, folder:str="./your/path/to/icbeb/"):
     cols = ['macro_auc', 'F_beta_macro', 'G_beta_macro']
 
     if selection is None:
