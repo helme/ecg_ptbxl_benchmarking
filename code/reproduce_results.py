@@ -9,7 +9,7 @@ def main():
     
     datafolder = '../../content/data/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1/'
     datafolder_icbeb = '../data/ICBEB/'
-    outputfolder = '../../content/drive/output/'
+    outputfolder = '../../content/drive/MyDrive/PTB-xl-output/'
 
     models = [
         conf_fastai_xresnet1d101,
@@ -41,7 +41,7 @@ def main():
         e.evaluate()
 
     # generate greate summary table
-    utils.generate_ptbxl_summary_table(folder = '../../content/drive/output/')
+    utils.generate_ptbxl_summary_table(folder = '../../content/drive/MyDrive/PTB-xl-output/')
 
     ##########################################
     # EXPERIMENT BASED ICBEB DATA
@@ -53,7 +53,7 @@ def main():
     e.evaluate()
 
     # generate greate summary table
-    utils.ICBEBE_table(folder='../../content/drive/output/')
+    utils.ICBEBE_table(folder='../../content/drive/MyDrive/PTB-xl-output/')
 
 if __name__ == "__main__":
     main()
