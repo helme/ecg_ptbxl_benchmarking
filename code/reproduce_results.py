@@ -5,11 +5,10 @@ from configs.fastai_configs import *
 from configs.wavelet_configs import *
 
 
-def main():
+def main(datafolder = '../../content/data/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1/',
+    datafolder_icbeb = '../data/ICBEB/',
+    outputfolder = '../../content/drive/MyDrive/PTB-xl-output/'):
     
-    datafolder = '../../content/data/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1/'
-    datafolder_icbeb = '../data/ICBEB/'
-    outputfolder = '../../content/drive/MyDrive/PTB-xl-output/'
 
     models = [
         conf_fastai_xresnet1d101,
@@ -38,10 +37,10 @@ def main():
         e = SCP_Experiment(name, task, datafolder, outputfolder, models)
         e.prepare()
         e.perform()
-        e.evaluate()
+        e.evaluate(n_bootstraping_samples=100, bootstrap_eval=True, dumped_bootstraps=False)
 
     # generate greate summary table
-    utils.generate_ptbxl_summary_table(folder = '../../content/drive/MyDrive/PTB-xl-output/')
+    utils.generate_ptbxl_summary_table(folder = outputfolder)
 
     ##########################################
     # EXPERIMENT BASED ICBEB DATA
