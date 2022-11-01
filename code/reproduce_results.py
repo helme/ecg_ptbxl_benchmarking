@@ -53,7 +53,7 @@ def main(datafolder, datafolder_icbeb, outputfolder):
     utils.ICBEBE_table(folder=outputfolder)
 
 if __name__ == "__main__":
-    if not (len(sys.argv) == 4:
+    if not (len(sys.argv) == 4):
         raise Exception('Include the data and model folders as arguments, e.g., python reproduce_results.py ./path/to/data/ ./path/to/icbeb/ ./path/to/output/')
     else:
         main(datafolder = sys.argv[1], datafolder_icbeb = sys.argv[2], outputfolder = sys.argv[3])
