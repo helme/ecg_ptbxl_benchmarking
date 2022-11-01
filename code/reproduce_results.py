@@ -3,11 +3,9 @@ from utils import utils
 # model configs
 from configs.fastai_configs import *
 from configs.wavelet_configs import *
+import sys
 
-
-def main(datafolder = '../../content/data/ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1/',
-    datafolder_icbeb = '../data/ICBEB/',
-    outputfolder = '../../content/drive/MyDrive/PTB-xl-output/'):
+def main(datafolder, datafolder_icbeb, outputfolder):
     
 
     models = [
@@ -52,7 +50,10 @@ def main(datafolder = '../../content/data/ptb-xl-a-large-publicly-available-elec
     e.evaluate()
 
     # generate greate summary table
-    utils.ICBEBE_table(folder='../../content/drive/MyDrive/PTB-xl-output/')
+    utils.ICBEBE_table(folder=outputfolder)
 
 if __name__ == "__main__":
-    main()
+    if not (len(sys.argv) == 4:
+        raise Exception('Include the data and model folders as arguments, e.g., python reproduce_results.py ./path/to/data/ ./path/to/icbeb/ ./path/to/output/')
+    else:
+        main(datafolder = sys.argv[1], datafolder_icbeb = sys.argv[2], outputfolder = sys.argv[3])
