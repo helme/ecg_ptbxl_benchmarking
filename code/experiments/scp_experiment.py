@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import multiprocessing
 from itertools import repeat
+import matplotlib.pyplot as plt
 
 class SCP_Experiment():
     '''
@@ -58,6 +59,10 @@ class SCP_Experiment():
         # Preprocess signal data
         self.X_train, self.X_val, self.X_test = utils.preprocess_signals(self.X_train, self.X_val, self.X_test, self.outputfolder+self.experiment_name+'/data/')
         self.n_classes = self.y_train.shape[1]
+
+        # Add noise to test data
+        noise = np.random.normal(self.X_test.mean(),self.X_test.std(),size=self.X_test.shape)
+        self.X_test = self.X_test + noise
 
         # save train and test labels
         self.y_train.dump(self.outputfolder + self.experiment_name+ '/data/y_train.npy')
@@ -113,6 +118,8 @@ class SCP_Experiment():
             # predict and dump
             model.predict(self.X_train).dump(mpath+'y_train_pred.npy')
             model.predict(self.X_val).dump(mpath+'y_val_pred.npy')
+            plt.plot(self.X_test[0,:,0])
+            plt.show()
             model.predict(self.X_test).dump(mpath+'y_test_pred.npy')
 
         modelname = 'ensemble'
