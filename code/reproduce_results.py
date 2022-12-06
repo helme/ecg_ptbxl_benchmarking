@@ -3,6 +3,7 @@ from utils import utils
 # model configs
 from configs.fastai_configs import *
 from configs.wavelet_configs import *
+from configs.your_configs import *
 import sys
 
 def main(datafolder, datafolder_icbeb, outputfolder):
@@ -16,6 +17,7 @@ def main(datafolder, datafolder_icbeb, outputfolder):
         conf_fastai_fcn_wang,
         conf_fastai_inception1d,
         conf_wavelet_standard_nn,
+        my_custom_config
         ]
 
     ##########################################

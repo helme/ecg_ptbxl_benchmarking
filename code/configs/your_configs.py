@@ -1,2 +1,2 @@
-your_custom_config = {'modelname':'YOUR_MODEL', 'modeltype':'YOUR_MODEL_TYPE', 
+my_custom_config = {'modelname':'tf_inception', 'modeltype':'MyModel', 
     'parameters':dict()}
