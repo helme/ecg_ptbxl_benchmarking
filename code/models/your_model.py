@@ -2,8 +2,9 @@ from models.base_model import ClassificationModel
 import tensorflow as tf
 
 
-class MyModel(ClassificationModel):
+class inception_time_model(ClassificationModel):
     def __init__(self, name, n_classes,  sampling_frequency, outputfolder, input_shape):
+        super().__init__()
         self.name = name
         self.n_classes = n_classes
         self.sampling_frequency = sampling_frequency
@@ -18,6 +19,7 @@ class MyModel(ClassificationModel):
         validation_data=(X_val, y_val), callbacks = [tf.keras.callbacks.LearningRateScheduler(scheduler, verbose=1)])
         #self.model.save(self.outputfolder +'last_model.h5')
     def predict(self, X):
+        X = [l.astype(np.float32) for l in X]
         return self.model.predict(X)
 
 
