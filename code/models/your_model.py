@@ -96,7 +96,7 @@ def build_model(input_shape, nb_classes, depth=10, use_residual=True):
                         multi_label=True,
                         )
               ])
-    
+    print("Inception model built.")
     return model
 
 def scheduler(epoch, lr):

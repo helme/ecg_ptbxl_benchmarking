@@ -10,13 +10,13 @@ def main(datafolder, datafolder_icbeb, outputfolder):
     
 
     models = [
-        conf_fastai_xresnet1d101,
-        conf_fastai_resnet1d_wang,
-        conf_fastai_lstm,
-        conf_fastai_lstm_bidir,
-        conf_fastai_fcn_wang,
-        conf_fastai_inception1d,
-        conf_wavelet_standard_nn,
+        #conf_fastai_xresnet1d101,
+        #conf_fastai_resnet1d_wang,
+        #conf_fastai_lstm,
+        #conf_fastai_lstm_bidir,
+        #conf_fastai_fcn_wang,
+        #conf_fastai_inception1d,
+        #conf_wavelet_standard_nn,
         my_custom_config
         ]
 
@@ -34,6 +34,8 @@ def main(datafolder, datafolder_icbeb, outputfolder):
        ]
 
     for name, task in experiments:
+        print(name)
+        print(task)
         e = SCP_Experiment(name, task, datafolder, outputfolder, models)
         e.prepare()
         e.perform()
