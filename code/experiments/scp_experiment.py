@@ -24,6 +24,8 @@ class SCP_Experiment():
         self.outputfolder = outputfolder
         self.datafolder = datafolder
         self.sampling_frequency = sampling_frequency
+        self.noise_mean = 0
+        self.noise_std_scale = 0.1
 
         # create folder structure if needed
         if not os.path.exists(self.outputfolder+self.experiment_name):
@@ -61,7 +63,7 @@ class SCP_Experiment():
         self.n_classes = self.y_train.shape[1]
 
         # Add noise to test data
-        noise = np.random.normal(self.X_test.mean(),self.X_test.std(),size=self.X_test.shape)
+        noise = np.random.normal(self.noise_mean,self.X_test.std() * self.noise_std_scale, size = self.X_test.shape)
         self.X_test = self.X_test + noise
 
         # save train and test labels
