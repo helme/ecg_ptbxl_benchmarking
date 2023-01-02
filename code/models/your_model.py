@@ -1,17 +1,18 @@
 from models.base_model import ClassificationModel
 import tensorflow as tf
+import numpy as np
 
 
 class inception_time_model(ClassificationModel):
     def __init__(self, name, n_classes,  sampling_frequency, outputfolder, input_shape):
-        super().__init__()
+        super(inception_time_model, self).__init__()
         self.name = name
         self.n_classes = n_classes
         self.sampling_frequency = sampling_frequency
         self.outputfolder = outputfolder
         self.input_shape = input_shape
         self.model = build_model((self.sampling_frequency*10,12),self.n_classes)
-        self.epoch = 30 
+        self.epoch = 2 
         self.batch_size =32
 
     def fit(self, X_train, y_train, X_val, y_val):
