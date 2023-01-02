@@ -17,7 +17,7 @@ def main(datafolder, datafolder_icbeb, outputfolder):
         #conf_fastai_fcn_wang,
         #conf_fastai_inception1d,
         #conf_wavelet_standard_nn,
-        my_custom_config
+        conf_tf_inception
         ]
 
     ##########################################
