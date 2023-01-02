@@ -12,7 +12,7 @@ class inception_time_model(ClassificationModel):
         self.outputfolder = outputfolder
         self.input_shape = input_shape
         self.model = build_model((self.sampling_frequency*10,12),self.n_classes)
-        self.epoch = 2 
+        self.epoch = 30 
         self.batch_size =32
 
     def fit(self, X_train, y_train, X_val, y_val):
