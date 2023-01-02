@@ -37,7 +37,7 @@ class SCP_Experiment():
             if not os.path.exists(outputfolder+self.experiment_name+'/data/'):
                 os.makedirs(self.outputfolder+self.experiment_name+'/data/')
 
-    def prepare(self):
+    def prepare(self, add_noise=True):
         # Load PTB-XL data
         self.data, self.raw_labels = utils.load_dataset(self.datafolder, self.sampling_frequency)
 
@@ -63,8 +63,9 @@ class SCP_Experiment():
         self.n_classes = self.y_train.shape[1]
 
         # Add noise to test data
-        noise = np.random.normal(self.noise_mean,self.X_test.std() * self.noise_std_scale, size = self.X_test.shape)
-        self.X_test = self.X_test + noise
+        if add_noise == True:
+            noise = np.random.normal(self.noise_mean,self.X_test.std() * self.noise_std_scale, size = self.X_test.shape)
+            self.X_test = self.X_test + noise
 
         # save train and test labels
         self.y_train.dump(self.outputfolder + self.experiment_name+ '/data/y_train.npy')
