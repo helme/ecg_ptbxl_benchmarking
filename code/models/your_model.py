@@ -20,7 +20,6 @@ class inception_time_model(ClassificationModel):
         validation_data=(X_val, y_val), callbacks = [tf.keras.callbacks.LearningRateScheduler(scheduler, verbose=1)])
         #self.model.save(self.outputfolder +'last_model.h5')
     def predict(self, X):
-        X = [l.astype(np.float32) for l in X]
         return self.model.predict(X)
 
 

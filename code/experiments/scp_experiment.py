@@ -37,7 +37,7 @@ class SCP_Experiment():
             if not os.path.exists(outputfolder+self.experiment_name+'/data/'):
                 os.makedirs(self.outputfolder+self.experiment_name+'/data/')
 
-    def prepare(self, add_noise=True):
+    def prepare(self, add_noise=False):
         # Load PTB-XL data
         self.data, self.raw_labels = utils.load_dataset(self.datafolder, self.sampling_frequency)
 
