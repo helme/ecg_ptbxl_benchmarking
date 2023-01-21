@@ -2,7 +2,7 @@ from models.base_model import ClassificationModel
 import tensorflow as tf
 import numpy as np
 
-
+        
 class inception_time_model(ClassificationModel):
     def __init__(self, name, n_classes,  sampling_frequency, outputfolder, input_shape, epoch=30, batch_size=32, lr_init = 0.001, lr_red="yes", model_depth=6, loss="bce", kernel_size=40, bottleneck_size=32, nb_filters=32, clf="binary"):
         super(inception_time_model, self).__init__()
@@ -20,7 +20,9 @@ class inception_time_model(ClassificationModel):
 
     def fit(self, X_train, y_train, X_val, y_val):
         self.model.fit(X_train, y_train, epochs=self.epoch, batch_size=self.batch_size, 
-        validation_data=(X_val, y_val), callbacks = [tf.keras.callbacks.LearningRateScheduler(scheduler, verbose=1)])
+        validation_data=(X_val, y_val), 
+        #callbacks = [tf.keras.callbacks.LearningRateScheduler(scheduler, verbose=1)
+        ])
         #self.model.save(self.outputfolder +'last_model.h5')
     def predict(self, X):
         return self.model.predict(X)
@@ -80,11 +82,8 @@ def build_model(input_shape, nb_classes, depth=6, use_residual=True, lr_init = 0
             input_res = x
 
     gap_layer = tf.keras.layers.GlobalAveragePooling1D()(x)
-    if clf == "binary":
-        output_layer = tf.keras.layers.Dense(units=nb_classes,activation='sigmoid')(gap_layer)
-    elif clf == "cat"
-        output_layer = tf.keras.layers.Dense(units=nb_classes,activation='softmax')(gap_layer)
-        
+
+    output_layer = tf.keras.layers.Dense(units=nb_classes,activation='sigmoid')(gap_layer)  
     model = tf.keras.models.Model(inputs=input_layer, outputs=output_layer)
     model.compile(loss=tf.keras.losses.BinaryCrossentropy(), optimizer=tf.keras.optimizers.Adam(learning_rate=lr_init), 
                   metrics=[tf.keras.metrics.BinaryAccuracy(),
@@ -107,7 +106,7 @@ def build_model(input_shape, nb_classes, depth=6, use_residual=True, lr_init = 0
     return model
 
 def scheduler(epoch, lr):
-    if i%5 == 0:
+    if epoch % 5 == 0:
         return lr*0.1
     else:
         return lr
