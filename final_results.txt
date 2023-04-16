@@ -1,0 +1,107 @@
+ ### 1. PTB-XL: all statements 
+ 
+| Model | AUC &darr; | paper/source | code | 
+|---:|:---|:---|:---| 
+| xresnet1d101 | 0.927(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.924(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_all | 0.923(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.920(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.915(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.912(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.909(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.826(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_subdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_superdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_rhythm | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_form | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_diagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+
+ ### 2. PTB-XL: diagnostic statements 
+ 
+| Model | AUC &darr; | paper/source | code | 
+|---:|:---|:---|:---| 
+| xresnet1d101 | 0.934(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.931(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.931(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.929(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.928(07) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.924(09) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_diagnostic | 0.915(09) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.837(19) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_subdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_superdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_rhythm | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_all | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_form | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+
+ ### 3. PTB-XL: Diagnostic subclasses 
+ 
+| Model | AUC &darr; | paper/source | code | 
+|---:|:---|:---|:---| 
+| resnet1d_wang | 0.934(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_subdiagnostic | 0.931(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.930(09) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.929(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.928(11) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.927(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.927(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.849(14) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_superdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_rhythm | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_all | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_form | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_diagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+
+ ### 4. PTB-XL: Diagnostic superclasses 
+ 
+| Model | AUC &darr; | paper/source | code | 
+|---:|:---|:---|:---| 
+| xresnet1d101 | 0.929(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.929(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.928(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.925(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.922(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_superdiagnostic | 0.922(05) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.917(06) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.872(08) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_subdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_rhythm | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_all | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_form | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_diagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+
+ ### 5. PTB-XL: Form statements 
+ 
+| Model | AUC &darr; | paper/source | code | 
+|---:|:---|:---|:---| 
+| xresnet1d101 | 0.891(13) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.875(16) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| inception1d | 0.870(24) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.864(20) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.863(19) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.849(16) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_form | 0.839(12) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.779(26) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_subdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_superdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_rhythm | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_all | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_diagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+
+ ### 6. PTB-XL: Rhythm statements 
+ 
+| Model | AUC &darr; | paper/source | code | 
+|---:|:---|:---|:---| 
+| inception1d | 0.953(13) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| xresnet1d101 | 0.950(16) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm | 0.949(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| lstm_bidir | 0.945(13) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| resnet1d_wang | 0.942(10) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| fcn_wang | 0.924(16) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_rhythm | 0.915(20) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| Wavelet+NN | 0.874(34) | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_subdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_superdiagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_all | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_form | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
+| tf_inception_diagnostic | -- | [our work](https://arxiv.org/abs/2004.13701) | [this repo](https://github.com/helme/ecg_ptbxl_benchmarking/)| 
