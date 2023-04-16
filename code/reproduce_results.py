@@ -17,7 +17,14 @@ def main(datafolder, datafolder_icbeb, outputfolder):
         #conf_fastai_fcn_wang,
         #conf_fastai_inception1d,
         #conf_wavelet_standard_nn,
-        conf_tf_inception
+        conf_tf_inception,
+        conf_tf_inception_all,
+        conf_tf_inception_diagnostic,
+        conf_tf_inception_form,
+        conf_tf_inception_rhythm,
+        conf_tf_inception_subdiagnostic,
+        conf_tf_inception_superdiagnostic
+
         ]
 
     ##########################################
