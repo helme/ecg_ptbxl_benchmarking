@@ -24,7 +24,6 @@ def main(datafolder, datafolder_icbeb, outputfolder):
         conf_tf_inception_rhythm,
         conf_tf_inception_subdiagnostic,
         conf_tf_inception_superdiagnostic
-
         ]
 
     ##########################################
