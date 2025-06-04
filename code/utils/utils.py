@@ -114,7 +114,7 @@ def apply_thresholds(preds, thresholds):
 # DATA PROCESSING STUFF
 
 def load_dataset(path, sampling_rate, release=False):
-    if path.split('/')[-2] == 'ptbxl':
+    if path.split('/')[-2] == 'ptb-xl-a-large-publicly-available-electrocardiography-dataset-1.0.1':
         # load and convert annotation data
         Y = pd.read_csv(path+'ptbxl_database.csv', index_col='ecg_id')
         Y.scp_codes = Y.scp_codes.apply(lambda x: ast.literal_eval(x))
@@ -335,7 +335,7 @@ def apply_standardizer(X, ss):
 
 # DOCUMENTATION STUFF
 
-def generate_ptbxl_summary_table(selection=None, folder='../output/'):
+def generate_ptbxl_summary_table(selection=None, folder: str="./your/path/to/ptbxl/"):
 
     exps = ['exp0', 'exp1', 'exp1.1', 'exp1.1.1', 'exp2', 'exp3']
     metric1 = 'macro_auc'
@@ -405,7 +405,7 @@ def generate_ptbxl_summary_table(selection=None, folder='../output/'):
             md_source += '| ' + row[0].replace('fastai_', '') + ' | ' + row[1] + ' | [our work]('+our_work+') | [this repo]('+our_repo+')| \n'
     print(md_source)
 
-def ICBEBE_table(selection=None, folder='../output/'):
+def ICBEBE_table(selection=None, folder:str="./your/path/to/icbeb/"):
     cols = ['macro_auc', 'F_beta_macro', 'G_beta_macro']
 
     if selection is None:

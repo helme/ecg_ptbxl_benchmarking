@@ -23,6 +23,8 @@ class SCP_Experiment():
         self.outputfolder = outputfolder
         self.datafolder = datafolder
         self.sampling_frequency = sampling_frequency
+        self.noise_mean = 0
+        self.noise_std_scale = 0.1
 
         # create folder structure if needed
         if not os.path.exists(self.outputfolder+self.experiment_name):
@@ -34,7 +36,7 @@ class SCP_Experiment():
             if not os.path.exists(outputfolder+self.experiment_name+'/data/'):
                 os.makedirs(self.outputfolder+self.experiment_name+'/data/')
 
-    def prepare(self):
+    def prepare(self, add_noise=False):
         # Load PTB-XL data
         self.data, self.raw_labels = utils.load_dataset(self.datafolder, self.sampling_frequency)
 
@@ -58,6 +60,11 @@ class SCP_Experiment():
         # Preprocess signal data
         self.X_train, self.X_val, self.X_test = utils.preprocess_signals(self.X_train, self.X_val, self.X_test, self.outputfolder+self.experiment_name+'/data/')
         self.n_classes = self.y_train.shape[1]
+
+        # Add noise to test data
+        if add_noise == True:
+            noise = np.random.normal(self.noise_mean,self.X_test.std() * self.noise_std_scale, size = self.X_test.shape)
+            self.X_test = self.X_test + noise
 
         # save train and test labels
         self.y_train.dump(self.outputfolder + self.experiment_name+ '/data/y_train.npy')
@@ -100,6 +107,9 @@ class SCP_Experiment():
             elif modeltype == "fastai_model":
                 from models.fastai_model import fastai_model
                 model = fastai_model(modelname, n_classes, self.sampling_frequency, mpath, self.input_shape, **modelparams)
+            elif modeltype == "inception_time_model":
+                from code.models.inception_time import inception_time_model
+                model = inception_time_model(modelname, n_classes, self.sampling_frequency, mpath, self.input_shape, **modelparams)
             elif modeltype == "YOUR_MODEL_TYPE":
                 # YOUR MODEL GOES HERE!
                 from models.your_model import YourModel
