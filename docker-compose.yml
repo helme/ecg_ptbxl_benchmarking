@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  ecg-benchmarking:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ecg-ptbxl-benchmarking:latest
+    container_name: ecg-benchmarking
+
+    # GPU support: For GPU usage, run with: docker-compose run --rm --gpus all ecg-benchmarking
+    # Or use nvidia-docker: nvidia-docker-compose up -d
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+    # Mount volumes for data persistence
+    volumes:
+      - ./data:/workspace/data
+      - ./output:/workspace/output
+      - ./code:/workspace/code
+      - ./tests:/workspace/tests
+      - /export/work/data/deep_learning/nonaka/PTBXL:/workspace/dataset
+
+    # Working directory
+    working_dir: /workspace
+
+    # Keep container running
+    stdin_open: true
+    tty: true
+
+    # Resource limits (adjust as needed)
+    # shm_size: '8gb'  # Uncomment if you encounter shared memory issues
+
+    command: /bin/bash
