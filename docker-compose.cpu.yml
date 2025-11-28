@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  ecg-benchmarking-cpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+    image: ecg-ptbxl-benchmarking:cpu
+    container_name: ecg-benchmarking-cpu
+
+    # Mount volumes for data persistence
+    volumes:
+      - ./data:/workspace/data
+      - ./output:/workspace/output
+      - ./code:/workspace/code
+      - ./tests:/workspace/tests
+
+    # Working directory
+    working_dir: /workspace
+
+    # Keep container running
+    stdin_open: true
+    tty: true
+
+    # Resource limits (adjust as needed)
+    # shm_size: '8gb'  # Uncomment if you encounter shared memory issues
+
+    command: /bin/bash

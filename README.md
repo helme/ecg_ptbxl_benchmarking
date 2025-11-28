@@ -10,11 +10,89 @@ Please acknowledge our work by citing the corresponding articles listed in **Ref
 
 ## Setup
 
-### Install dependencies
+### Option 1: Docker (Recommended)
+
+#### GPU Version
+If you have a GPU and [nvidia-docker2](https://github.com/NVIDIA/nvidia-docker) installed:
+
+```bash
+# Method 1: Using docker-compose (basic, CPU fallback)
+docker-compose up -d
+docker-compose exec ecg-benchmarking /bin/bash
+
+# Method 2: Using docker-compose with GPU (if supported)
+docker-compose run --rm --gpus all ecg-benchmarking
+
+# Method 3: Using nvidia-docker (recommended for GPU)
+docker build -t ecg-benchmarking:gpu .
+docker run --gpus all -it \
+  -v $(pwd)/data:/workspace/data \
+  -v $(pwd)/output:/workspace/output \
+  -v $(pwd)/code:/workspace/code \
+  ecg-benchmarking:gpu
+
+# Inside the container, download the datasets
+./get_datasets.sh
+
+# Run experiments
+cd code
+python reproduce_results.py
+```
+
+#### CPU Version
+For CPU-only execution:
+
+```bash
+# Using dedicated CPU docker-compose file
+docker-compose -f docker-compose.cpu.yml up -d
+docker-compose -f docker-compose.cpu.yml exec ecg-benchmarking-cpu /bin/bash
+```
+
+#### Quick Start (Simplest Method)
+
+```bash
+# Start the container (works on most systems)
+docker-compose up -d
+
+# Enter the container
+docker-compose exec ecg-benchmarking /bin/bash
+
+# Download datasets and run experiments
+./get_datasets.sh
+cd code
+python reproduce_results.py
+```
+
+### Option 2: Conda Environment
+
 Install the dependencies (wfdb, pytorch, torchvision, cudatoolkit, fastai, fastprogress) by creating a conda environment:
 
     conda env create -f ecg_env.yml
     conda activate ecg_env
+
+### Docker Notes
+
+**Volume Mounts**: The Docker setup automatically mounts `data/`, `output/`, `code/`, and `tests/` directories as volumes. This means:
+- Downloaded datasets persist on your host machine
+- Experiment results are saved to your host machine
+- Code changes on your host are reflected in the container
+
+**GPU Support**: The default `docker-compose.yml` works on both GPU and CPU systems:
+- On systems with NVIDIA GPU and docker GPU support, it will use the GPU
+- On systems without GPU support, it will fall back to CPU
+- For explicit GPU usage with older docker-compose versions, use Method 3 (nvidia-docker) shown above
+- For CPU-only, use `docker-compose.cpu.yml` to avoid CUDA dependencies
+
+**Docker Compose Compatibility**:
+- The configuration uses version 3.3 for maximum compatibility
+- If you have docker-compose v2+ with GPU support, you can use `--gpus all` flag
+- For older setups with nvidia-docker, use the manual `docker run` commands
+
+**Troubleshooting**:
+- If you encounter "out of shared memory" errors, uncomment `shm_size: '8gb'` in `docker-compose.yml`
+- For permission issues with mounted volumes, run `chmod -R 777 data output` on your host
+- If GPU is not detected, verify with `docker run --gpus all nvidia/cuda:10.2-base nvidia-smi`
+- If you get "Unsupported config option" errors, you may need to update docker-compose or use the manual `docker run` method
 
 ### Get data
 Download and prepare the datasets (PTB-XL and ICBEB) via the following bash-script:
@@ -31,10 +109,41 @@ Change directory: `cd code` and then call
 
     python reproduce_results.py
 
-This will perform all experiments for all models used in the paper. 
-Depending on the executing environment, this will take up to several hours. 
-Once finished, all trained models, predictions and results are stored in `output/`, 
-where for each experiment a sub-folder is created each with `data/`, `models/` and `results/` sub-sub-folders. 
+This will perform all experiments for all models used in the paper.
+Depending on the executing environment, this will take up to several hours.
+Once finished, all trained models, predictions and results are stored in `output/`,
+where for each experiment a sub-folder is created each with `data/`, `models/` and `results/` sub-sub-folders.
+
+### Lead-specific experiments
+
+You can also run experiments using specific ECG leads instead of all 12 leads. For example, to run experiments using only Lead II:
+
+    python reproduce_results_lead_ii.py
+
+To run experiments with custom lead selection in your own code:
+
+```python
+from experiments.scp_experiment import SCP_Experiment
+from configs.fastai_configs import *
+
+datafolder = '../data/ptbxl/'
+outputfolder = '../output/'
+models = [conf_fastai_xresnet1d101]
+
+# Use only Lead II
+e = SCP_Experiment('exp_lead_ii', 'diagnostic', datafolder, outputfolder, models, leads='II')
+e.prepare()
+e.perform()
+e.evaluate()
+
+# Or use multiple specific leads
+e = SCP_Experiment('exp_leads_i_ii_v1', 'diagnostic', datafolder, outputfolder, models, leads=['I', 'II', 'V1'])
+e.prepare()
+e.perform()
+e.evaluate()
+```
+
+Available lead names: `'I'`, `'II'`, `'III'`, `'aVR'`, `'aVL'`, `'aVF'`, `'V1'`, `'V2'`, `'V3'`, `'V4'`, `'V5'`, `'V6'` 
 
 ### Download models and results
 

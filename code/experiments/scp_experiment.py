@@ -11,7 +11,7 @@ class SCP_Experiment():
         Experiment on SCP-ECG statements. All experiments based on SCP are performed and evaluated the same way.
     '''
 
-    def __init__(self, experiment_name, task, datafolder, outputfolder, models, sampling_frequency=100, min_samples=0, train_fold=8, val_fold=9, test_fold=10, folds_type='strat'):
+    def __init__(self, experiment_name, task, datafolder, outputfolder, models, sampling_frequency=100, min_samples=0, train_fold=8, val_fold=9, test_fold=10, folds_type='strat', leads='all'):
         self.models = models
         self.min_samples = min_samples
         self.task = task
@@ -23,6 +23,7 @@ class SCP_Experiment():
         self.outputfolder = outputfolder
         self.datafolder = datafolder
         self.sampling_frequency = sampling_frequency
+        self.leads = leads
 
         # create folder structure if needed
         if not os.path.exists(self.outputfolder+self.experiment_name):
@@ -36,7 +37,7 @@ class SCP_Experiment():
 
     def prepare(self):
         # Load PTB-XL data
-        self.data, self.raw_labels = utils.load_dataset(self.datafolder, self.sampling_frequency)
+        self.data, self.raw_labels = utils.load_dataset(self.datafolder, self.sampling_frequency, leads=self.leads)
 
         # Preprocess label data
         self.labels = utils.compute_label_aggregations(self.raw_labels, self.datafolder, self.task)

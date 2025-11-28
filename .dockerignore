@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Data directories (will be mounted as volumes)
+data/
+output/
+tmp_data/
+
+# Conda
+ecg_env.yml
+*.conda
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Docker
+Dockerfile
+Dockerfile.cpu
+.dockerignore
+docker-compose.yml
+docker-compose.cpu.yml
+
+# Documentation
+*.md
+LICENSE
+
+# Logs
+*.log

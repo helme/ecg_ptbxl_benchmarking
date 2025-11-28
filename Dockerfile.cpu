@@ -1,0 +1,73 @@
+# CPU-only version - no CUDA dependencies
+FROM python:3.8-slim
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    curl \
+    build-essential \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    libhdf5-dev \
+    libnetcdf-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip setuptools wheel
+
+# Set working directory
+WORKDIR /workspace
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies (CPU versions)
+RUN pip install --no-cache-dir \
+    torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html || \
+    pip install --no-cache-dir torch==1.4.0 torchvision==0.5.0
+
+RUN pip install --no-cache-dir \
+    numpy==1.19.4 \
+    scipy==1.5.3 \
+    pandas==1.1.4 \
+    scikit-learn==0.23.2 \
+    matplotlib==3.3.2 \
+    wfdb==3.1.1 \
+    tqdm==4.54.0 \
+    pyyaml==5.3.1 \
+    h5py==2.10.0 \
+    scikit-image==0.17.2 \
+    joblib==0.17.0 \
+    Pillow==8.0.1 \
+    requests==2.25.0 \
+    click==7.1.2
+
+# Install TensorFlow (CPU version)
+RUN pip install --no-cache-dir tensorflow==2.3.0
+
+# Install fastai
+RUN pip install --no-cache-dir fastai==1.0.61 fastprogress==1.0.0
+
+# Copy the rest of the application
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p data/ptbxl data/ICBEB output tmp_data
+
+# Set permissions
+RUN chmod +x get_datasets.sh
+
+# Default command
+CMD ["/bin/bash"]

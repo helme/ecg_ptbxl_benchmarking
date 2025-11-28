@@ -113,7 +113,49 @@ def apply_thresholds(preds, thresholds):
 
 # DATA PROCESSING STUFF
 
-def load_dataset(path, sampling_rate, release=False):
+def select_leads(X, leads):
+    """
+    Select specific ECG leads from the data.
+
+    Parameters:
+    -----------
+    X : array-like
+        ECG data with shape (n_samples, n_timesteps, n_leads)
+    leads : str or list
+        Lead(s) to select. Can be:
+        - A single lead name (e.g., 'II')
+        - A list of lead names (e.g., ['I', 'II', 'V1'])
+        - 'all' to keep all leads (default)
+
+    Returns:
+    --------
+    array-like
+        ECG data with selected leads
+    """
+    # Standard 12-lead ECG order
+    lead_names = ['I', 'II', 'III', 'aVR', 'aVL', 'aVF', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6']
+
+    # Convert single lead to list
+    if isinstance(leads, str) and leads != 'all':
+        leads = [leads]
+
+    if leads == 'all':
+        return X
+
+    # Get lead indices
+    lead_indices = []
+    for lead in leads:
+        if lead in lead_names:
+            lead_indices.append(lead_names.index(lead))
+        else:
+            raise ValueError(f"Unknown lead name: {lead}. Valid names are: {lead_names}")
+
+    # Select leads from data
+    X_selected = np.array([x[:, lead_indices] for x in X])
+
+    return X_selected
+
+def load_dataset(path, sampling_rate, release=False, leads='all'):
     if path.split('/')[-2] == 'ptbxl':
         # load and convert annotation data
         Y = pd.read_csv(path+'ptbxl_database.csv', index_col='ecg_id')
@@ -129,6 +171,10 @@ def load_dataset(path, sampling_rate, release=False):
 
         # Load raw signal data
         X = load_raw_data_icbeb(Y, sampling_rate, path)
+
+    # Select specific leads if requested
+    if leads != 'all':
+        X = select_leads(X, leads)
 
     return X, Y
 
